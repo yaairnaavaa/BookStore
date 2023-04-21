@@ -10,7 +10,7 @@ near call $CONTRACT init_contract '{"owner_id":"'$ID'"}' --accountId $ID
 
 Crear un libro:
 
-    near call $CONTRACT create_book '{"title":"Libro 1", "description":"Descripcion 1", "author":"Autor 1", "year":2023, "price":5, "stock":5}' --accountId yairnava.testnet
+    near call $CONTRACT create_book '{"title":"Libro 5", "description":"Descripcion 5", "author":"Autor 5", "year":2023, "price":5, "stock":5}' --accountId yairnava.testnet
 
 Consultar todos los libros
 
@@ -26,11 +26,7 @@ Consultar libro por id
 
 Comprar un libro:
 
-    near call $CONTRACT buy_book '{"book_id": 2}' --accountId yairnava.testnet
-
-Verificar si ya se compro un libro:
-
-    near call $CONTRACT purchased_book '{"book_id": 1}' --accountId yairnava.testnet
+    near call $CONTRACT buy_book '{"book_id": 3}' --accountId yairnava.testnet
 
 Crear perfil:
 

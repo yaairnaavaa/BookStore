@@ -27,6 +27,13 @@ pub enum StorageKey {
 
 #[derive(Serialize, Deserialize, BorshDeserialize, BorshSerialize, Clone)]
 #[serde(crate = "near_sdk::serde")]
+pub struct BookOwner {
+    book_id : u64,
+    owner : AccountId
+}
+
+#[derive(Serialize, Deserialize, BorshDeserialize, BorshSerialize, Clone)]
+#[serde(crate = "near_sdk::serde")]
 pub struct Profile {
     name: String,
     bio: String
@@ -106,11 +113,13 @@ impl Contract {
 
             self.profiles.insert(account.clone(),new_profile.clone());
 
-            env::log(
-                json!(new_profile.clone())
-                .to_string()
-                .as_bytes(),
-            );
+            let formated_content=&json!({   
+                "standard": "nep171",
+                "version": "1.0.0",
+                "event": "create_profile",
+                "data":new_profile
+            }).to_string(); 
+            env::log_str(&format!("EVENT_JSON:{}",formated_content).to_string(),);
     
             return "Perfil creado con éxito".to_string();
         } else {
@@ -160,11 +169,13 @@ impl Contract {
 
         self.books.insert(&book_id, &book);
 
-        env::log(
-            json!(book.clone())
-            .to_string()
-            .as_bytes(),
-        );
+        let formated_content=&json!({   
+            "standard": "nep171",
+            "version": "1.0.0",
+            "event": "create_book",
+            "data":book
+        }).to_string(); 
+        env::log_str(&format!("EVENT_JSON:{}",formated_content).to_string(),);
 
         return "Libro registrado con éxito".to_string();
     }
@@ -253,7 +264,7 @@ impl Contract {
             }
 
             let new_data = Book {
-                book_id : book_id,
+                book_id : book_id.clone(),
                 title : book_data.title,
                 description : book_data.description,
                 author : book_data.author,
@@ -264,6 +275,19 @@ impl Contract {
 
             self.books.insert(&book_id, &new_data);
             self.internal_add_book_to_owner(&env::signer_account_id(), &book_id);
+
+            let book_owner = BookOwner {
+                book_id : book_id,
+                owner : env::signer_account_id(),
+            };
+
+            let formated_content=&json!({   
+                "standard": "nep171",
+                "version": "1.0.0",
+                "event": "buy_book",
+                "data":book_owner
+            }).to_string(); 
+            env::log_str(&format!("EVENT_JSON:{}",formated_content).to_string(),);
 
             return "Libro comprado con éxito".to_string();
 
