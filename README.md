@@ -6,7 +6,7 @@ echo $CONTRACT
 
 Inicializar contrato:
 
-near call $CONTRACT init_contract '{"owner_id":"'$ID'"}' --accountId $ID
+near call $CONTRACT init_contract '{"owner_id":"'$CONTRACT'"}' --accountId $CONTRACT
 
 Crear un libro:
 
