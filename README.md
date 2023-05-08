@@ -1,8 +1,12 @@
 # BookStore 📄
 
-CONTRACT=dev-1682014826037-50515912441276
+CONTRACT=dev-1683517949014-68941680708437
 
 echo $CONTRACT
+
+Compilar y desplegar contrato:
+
+    ./build.sh
 
 Inicializar contrato:
 
@@ -10,7 +14,9 @@ near call $CONTRACT init_contract '{"owner_id":"'$CONTRACT'"}' --accountId $CONT
 
 Crear un libro:
 
-    near call $CONTRACT create_book '{"title":"Libro 5", "description":"Descripcion 5", "author":"Autor 5", "year":2023, "price":5, "stock":5}' --accountId yairnava.testnet
+    near call $CONTRACT create_book '{"title":"Libro 1", "description":"Descripcion 1", "author":"Autor 1", "year":2023, "price":5, "stock":5}' --accountId $CONTRACT
+
+    near call $CONTRACT create_book '{"title":"Libro 2", "description":"Descripcion 2", "author":"Autor 2", "year":2023, "price":5, "stock":5}' --accountId $CONTRACT
 
 Consultar todos los libros
 
@@ -26,7 +32,7 @@ Consultar libro por id
 
 Comprar un libro:
 
-    near call $CONTRACT buy_book '{"book_id": 3}' --accountId yairnava.testnet
+    near call $CONTRACT buy_book '{"book_id": 0}' --accountId yairnava.testnet --deposit 5
 
 Crear perfil:
 
