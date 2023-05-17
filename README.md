@@ -6,7 +6,13 @@ NEAR_ENV=mainnet ./build.sh
 
 CONTRACT=bookstorebos.near
 
+CONTRACT=dev-1683517949014-68941680708437
+
 echo $CONTRACT
+
+Compilar y desplegar contrato:
+
+    ./build.sh
 
 Inicializar contrato:
 
@@ -38,7 +44,7 @@ Consultar libro por id
 
 Comprar un libro:
 
-    near call $CONTRACT buy_book '{"book_id": 3}' --accountId yairnava.testnet
+    near call $CONTRACT buy_book '{"book_id": 0}' --accountId yairnava.testnet --deposit 5
 
 Crear perfil:
 
